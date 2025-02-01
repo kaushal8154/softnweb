@@ -66,6 +66,35 @@
 </div>    
     <!-- /.content-header -->
 
+        <!-- Page Modal Popup -->
+
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">User Info</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- <p>One fine body&hellip;</p> -->
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+      <!-- /.modal -->
+
+        <!-- -->
+
 @endsection
 
 
@@ -93,6 +122,60 @@
                 { data: 'date', name: 'date',searchable:false },
                 { data: 'actions', name: 'actions',searchable:false,sortable:false },
 			],
+        });
+
+                
+        $(document).on('click','.view-info',function(){
+
+            var rid = $(this).attr('data-rid');
+
+            // build the ajax call
+			$.ajax({
+				url: site_url+"/admin/user/userdetail",
+				type: 'POST',
+				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+				data: {					
+					userid:'',
+				},
+				success: function (response) {		
+                    console.log(response);
+                    return false;
+
+					if(response.status == '1'){
+						$.toast({
+							heading: 'Success',
+							text: response.message,
+							showHideTransition: 'slide',
+							icon: 'success',
+							position:'top-right',
+						});		
+
+						$("#tblStudentList tbody").html("");
+						$("#tblStudentList tbody").html(response.data.listrows);
+
+					}else if(response.status == '0'){
+						$.toast({
+							heading: 'Error',
+							text: response.message,
+							showHideTransition: 'fade',
+							icon: 'error',
+							position:'top-right',
+						});		
+					}
+
+				},
+				error: function (response) {
+					//console.log(response);
+					$.toast({
+						heading: 'Error',
+						text: response.status+" "+response.statusText,
+						showHideTransition: 'fade',
+						icon: 'error',
+						position:'top-right',
+					});
+				},				
+			});
+
         });
 
     });

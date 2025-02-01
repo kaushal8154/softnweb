@@ -92,10 +92,17 @@ Route::post('/admin/signin', [LoginController::class, 'login']);
 
 Route::get('/admin/userlist', [UsersController::class, 'index'])->middleware('auth','adminAccess');
 Route::post('/admin/usersdata', [UsersController::class, 'getUsersData'])->middleware('auth','adminAccess');
+Route::get('/admin/user/view/{id}', [UsersController::class, 'show'])->middleware('auth','adminAccess');
+Route::get('/admin/user/edit/{id}', [UsersController::class, 'edit'])->middleware('auth','adminAccess');
+Route::post('/admin/user/userdetail', [UsersController::class, 'getUserDetail'])->middleware('auth','adminAccess');
+
+Route::post('/admin/user/create', [UsersController::class, 'create'])->middleware('auth','adminAccess');
+Route::post('/admin/user/update', [UsersController::class, 'update'])->middleware('auth','adminAccess');
+
 
 Route::get('/admin/signout', function(){
     Auth::logout();    
-    return redirect('/admin/login');
+    return redirect('/admin/login')->with('success', 'Logged Out Successfully!');
 })->name('adminsignout');
 
 /**   */
