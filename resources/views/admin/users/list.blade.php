@@ -135,32 +135,32 @@
 				type: 'POST',
 				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 				data: {					
-					userid:'',
+					userid:rid,
 				},
 				success: function (response) {		
                     console.log(response);
-                    return false;
+                    //return false;
 
-					if(response.status == '1'){
-						$.toast({
+					if(response.success == true){
+                        $(".modal-body").html("");
+                        $(".modal-body").html(response.data.modalBody);
+						/* $.toast({
 							heading: 'Success',
 							text: response.message,
 							showHideTransition: 'slide',
 							icon: 'success',
 							position:'top-right',
-						});		
+						});		 */
 
-						$("#tblStudentList tbody").html("");
-						$("#tblStudentList tbody").html(response.data.listrows);
-
-					}else if(response.status == '0'){
-						$.toast({
+					}else{
+                        $(".modal-body").html("Not Found");
+						/* $.toast({
 							heading: 'Error',
 							text: response.message,
 							showHideTransition: 'fade',
 							icon: 'error',
 							position:'top-right',
-						});		
+						});	 */	
 					}
 
 				},

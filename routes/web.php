@@ -85,18 +85,19 @@ Route::delete('deleteYoaks/{id}',function($id=0){
 
 /**  Admin Routes */
 
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth','adminAccess');
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth','adminAccess')->name('admin.dashboard');
 Route::get('/admin/login', [LoginController::class, 'index']);
 Route::post('/admin/signin', [LoginController::class, 'login']);
 
 
-Route::get('/admin/userlist', [UsersController::class, 'index'])->middleware('auth','adminAccess');
+Route::get('/admin/userlist', [UsersController::class, 'index'])->middleware('auth','adminAccess')->name('admin.userlist');
 Route::post('/admin/usersdata', [UsersController::class, 'getUsersData'])->middleware('auth','adminAccess');
 Route::get('/admin/user/view/{id}', [UsersController::class, 'show'])->middleware('auth','adminAccess');
+Route::get('/admin/user/add', [UsersController::class, 'show'])->middleware('auth','adminAccess');
 Route::get('/admin/user/edit/{id}', [UsersController::class, 'edit'])->middleware('auth','adminAccess');
 Route::post('/admin/user/userdetail', [UsersController::class, 'getUserDetail'])->middleware('auth','adminAccess');
 
-Route::post('/admin/user/create', [UsersController::class, 'create'])->middleware('auth','adminAccess');
+//Route::post('/admin/user/create', [UsersController::class, 'create'])->middleware('auth','adminAccess');
 Route::post('/admin/user/update', [UsersController::class, 'update'])->middleware('auth','adminAccess');
 
 

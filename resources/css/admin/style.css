@@ -1,0 +1,17 @@
+
+
+.error{
+    color:red;
+}
+
+.alert-success{
+    z-index: 9999;    
+}
+
+.viewinfo tr td{
+    padding:10px;
+}
+
+.viewinfo tr td label{
+    padding:5px 0 0 0;
+}

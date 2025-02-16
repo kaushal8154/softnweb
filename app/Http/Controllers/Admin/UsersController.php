@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 //use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +24,13 @@ class UsersController extends Controller
         ]);
 
 
-        $apiData = [];
-        $response = ['success'=>false,'message'=>'','data'=>$apiData];
+        //$authid = Auth::id(); 
+        $userid = $request->userid;
+        $userInfo = User::find($userid);
+        $modalBody = view('admin.users.info',['pageData'=>$userInfo])->render();
+
+        $apiData = ['modalBody'=>$modalBody];
+        $response = ['success'=>true,'message'=>'','data'=>$apiData];
         
         return response()->json($response);
 
@@ -41,17 +47,25 @@ class UsersController extends Controller
         return view('admin.users.show',['pageData'=>$pageData]);
     }
 
-    public function edit($userid=''){         
+    public function edit($userid=0){         
+
+        $pageData = [];
+        $userData = User::find($userid);
+        $pageData = $userData;
+
+        return view('admin.users.add',['pageData'=>$pageData]);
+    }
+
+    public function add(){         
 
         $pageData = [];
         return view('admin.users.add',['pageData'=>$pageData]);
     }
 
-    public function create(Request $request){         
+    /* public function create(Request $request){         
 
-        $pageData = [];
-        return view('admin.users.add',['pageData'=>$pageData]);
-    }
+        
+    } */
 
     public function update(Request $request){         
         
@@ -96,7 +110,7 @@ class UsersController extends Controller
 
         $order = $request->order[0]['dir'];
 
-        $query = DB::table('users')->select('*');
+        $query = DB::table('users')->select('*')->where('user_type','user');
         if(trim($search_val) != ''){
             $query->where("firstname","like","%$search_val%");
             $query->orWhere("lastname","like","%$search_val%");
@@ -122,9 +136,12 @@ class UsersController extends Controller
 
             
             //$item->actions = "<a href='".url('admin/user/view/'.$uid)."' class='btn btn-block bg-gradient-primary btn-xs' >View</a>  ";
+            $editurl = url("admin/user/edit/$uid");
+            $delurl = url("admin/user/edit/$uid");
+
             $item->actions = "<a href='javascript:void(0);' data-toggle='modal' data-target='#modal-lg' class='btn btn-block bg-gradient-primary btn-xs view-info' data-rid='".$item->id."' >View</a> ";
-            $item->actions.= "<a href='javascript:void(0)' class='btn btn-block bg-gradient-secondary btn-xs' href='#' >Edit</a>  ";
-            $item->actions.= "<a href='javascript:void(0)' class='btn btn-block bg-gradient-danger btn-xs' href='#' >Delete</a>  ";
+            $item->actions.= "<a href='".$editurl."' class='btn btn-block bg-gradient-secondary btn-xs' href='#' >Edit</a>  ";
+            $item->actions.= "<a href='".$delurl."' class='btn btn-block bg-gradient-danger btn-xs' href='#' >Delete</a>  ";
             
         }
 
@@ -134,5 +151,10 @@ class UsersController extends Controller
             'recordsFiltered' => $totalRecords,
             'data' => $data,
         ]);
+    }
+
+    public function delete($userid=0){
+        //DB::table("users")->where('id',$userid)->delete();
+
     }
 }

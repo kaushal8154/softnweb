@@ -34,13 +34,17 @@
                         <div class="card-body" >
                             <div class="row">
                                 <div class="col-sm-12">
-
+                                    <form method="POST" name="frmUserAdd" id="frmUserAdd"  action="{{ url('admin/user/add') }}" >
+                                        <input type="hidden" name="uid" value="{{ $pageData['userid'] }}" />
                                     <table>
                                         <tr>
                                             <td><lable>Name:</lable></td>
-                                            <td>Abc</td>
+                                            <td>
+                                                <input type="text" name="firstname" id="lastname" />
+                                            </td>
                                         </tr>
                                     </table>
+                                    </form>
 
                                 </div>
                             </div>
