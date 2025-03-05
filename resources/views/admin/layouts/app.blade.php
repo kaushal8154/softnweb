@@ -19,25 +19,9 @@
 
         <script src="{{ asset('js/jquery.js') }}"></script>    
 
-        
-
-            @vite([
-                
-                'resources/js/jquery.validate.min.js',
-                'resources/js/admin/adminlte.min.js',
-                'resources/js/admin/bootstrap.bundle.min.js',
-                'resources/js/admin/jquery.dataTables.min.js',
-            ])
-
-            @vite([
-                'resources/css/admin/adminlte.min.css',
-                'resources/css/admin/jquery.dataTables.min.css',
-                'resources/css/admin/style.css',
-            ])    
-        
+        @vite(['resources/js/admin.js','resources/css/admin.css'])        
         <!-- ************** -->
                 
-
     </head>
 
    
