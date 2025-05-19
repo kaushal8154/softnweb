@@ -85,12 +85,10 @@ class UsersController extends Controller
         /* $totalRecords = DB::table("users")->count();
         $data = DB::table("users")->offset($offset)->limit($limit)->get();         */
 
+        $orderBy = 'id';
         $search_val = $request->search['value'];
         $orderColumn = $request->order[0]['column'];
-        if($orderColumn){
-            $orderBy = 'id';
-        }
-
+        
         switch($orderColumn){
             case 0:
                 $orderBy = 'id';
@@ -133,12 +131,11 @@ class UsersController extends Controller
                 
                 $item->profile_photo = "";
             }
-
-            
-            //$item->actions = "<a href='".url('admin/user/view/'.$uid)."' class='btn btn-block bg-gradient-primary btn-xs' >View</a>  ";
+                        
             $editurl = url("admin/user/edit/$uid");
             $delurl = url("admin/user/edit/$uid");
 
+            //$item->actions = "<a href='".url('admin/user/view/'.$uid)."' class='btn btn-block bg-gradient-primary btn-xs' >View</a>  ";
             $item->actions = "<a href='javascript:void(0);' data-toggle='modal' data-target='#modal-lg' class='btn btn-block bg-gradient-primary btn-xs view-info' data-rid='".$item->id."' >View</a> ";
             $item->actions.= "<a href='".$editurl."' class='btn btn-block bg-gradient-secondary btn-xs' href='#' >Edit</a>  ";
             $item->actions.= "<a href='".$delurl."' class='btn btn-block bg-gradient-danger btn-xs' href='#' >Delete</a>  ";

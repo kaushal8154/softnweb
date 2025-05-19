@@ -17,9 +17,8 @@
         <link rel="stylesheet" href="{{ asset('css/admin/jquery.dataTables.min.css') }}" />  
         <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}" />    --> 
 
-        <script src="{{ asset('js/jquery.js') }}"></script>    
-
-        @vite(['resources/js/admin.js','resources/css/admin.css'])        
+        <script src="{{ asset('js/jquery.js') }}"></script>            
+        @vite(['resources/css/admin.css'])        
         <!-- ************** -->
                 
     </head>
@@ -59,6 +58,8 @@
 
         <!-- ******************* -->
 
+        @vite(['resources/js/admin.js'])        
+
         <script>
             var site_url = '{{ config("app.url") }}';                        
             var admin_url = '{{ config("app.url") }}'+'/admin';                       
@@ -66,8 +67,6 @@
         </script>
 
         @yield('pagescript')
-
-
         @yield('pagecss')
 
     </body>
