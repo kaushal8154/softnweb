@@ -29,6 +29,13 @@ class ComplaintController extends Controller
             'cmpid' => 'required|numeric',                        
         ]);        
 
+        $authid = Auth::id();
+        $exists = Complaint::where(['id'=>$request->cmpid,'user_id'=>$authid])->exists();
+        if (!$exists) {
+            $response = array('success'=>false,'message'=>'Invalid Request!','data'=>[]);
+            return response()->json($response);
+        }
+
         Complaint::find($request->cmpid)->delete();
         $response = array('success'=>true,'message'=>'Success!','data'=>[]);
         return response()->json($response);

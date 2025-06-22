@@ -73,26 +73,18 @@ Route::post('assignedcomplaints',[ComplaintController::class, 'getAssignedCompla
 Route::post('updateCmpStatus',[ComplaintController::class, 'updateComplaintStatus'])->middleware('auth:sanctum','techieAccess'); 
 
 
-
-
 Route::post('/signin', function (Request $request) {  
     //dd($request->email);
-
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',        
     ]);    
-    //dd($request->password);
+    
     $user = User::where('email', $request->email)->first();    
      
     if (! $user || ! Hash::check($request->password, $user->password)) {
-        
-        /* throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]); */
-
+                
         $data = array();        
-
         $response = array('success'=>false,'message'=>'Incorrect Email or Password','data'=>$data);
         return response()->json($response);
 
