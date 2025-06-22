@@ -103,7 +103,7 @@ class ComplaintController extends Controller
         ]);    
 
         $page = isset($request->page) ? $request->page : 1;        
-        $limit = 2;
+        $limit = 5;
         $offset = ($page - 1) * $limit;
         $status = isset($request->status) ? $request->status : 'all';        
 
@@ -141,7 +141,7 @@ class ComplaintController extends Controller
 
         $page = isset($request->page) ? $request->page : 1;        
         $status = isset($request->status) ? $request->status : 'all';        
-        $limit = 2;
+        $limit = 5;
         $offset = ($page - 1) * $limit;        
 
         $query = DB::table("complaints")
@@ -178,7 +178,7 @@ class ComplaintController extends Controller
 
         $page = isset($request->page) ? $request->page : 1;        
         $status = isset($request->status) ? $request->status : 'all';        
-        $limit = 2;
+        $limit = 5;
         $offset = ($page - 1) * $limit;        
 
         $query = DB::table("complaints")
