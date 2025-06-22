@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Complaint Management System</title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,8 +21,15 @@
         </style>
     </head>
     <body class="">        
+           
+        <p><b>Hello {{ $username }}</b></p>    
 
-        <p>New User registered {{ $firstname }}  {{ $lastname }} </p>
+        <p>Your complaint {{ $complaint_sub }} is resolved </p>
+
+        <p>
+            Regards<br/>
+            {{ config('app.name') }}
+        </p>
 
     </body>
 </html>

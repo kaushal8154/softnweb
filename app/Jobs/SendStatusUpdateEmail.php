@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
-class SendWelcomeEmail implements ShouldQueue
+class SendStatusUpdateEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,11 +21,11 @@ class SendWelcomeEmail implements ShouldQueue
      * @return void
      */
 
-    protected $student; 
+    protected $complaint; 
 
-    public function __construct($student)
+    public function __construct($complaint)
     {
-        $this->student = $student;
+        $this->complaint = $complaint;
     }
 
     /**
@@ -35,11 +35,12 @@ class SendWelcomeEmail implements ShouldQueue
      */
     public function handle()
     {
-        $adminemail = 'kaushalkapadiya@gmail.com'; 
-        $mailBody = array('firstname'=>$this->student->firstname,'lastname'=>$this->student->lastname);
-        Mail::send('mails.newstudent',$mailBody, function($message) use ($adminemail)
+        $useremail = $this->complaint['useremail']; 
+        //$useremail = 'kaushalkapadiya@gmail.com'; 
+        $mailBody = array('username'=>$this->complaint['username'],'complaint_sub'=>$this->complaint['complaint_sub']);
+        Mail::send('mails.complaint',$mailBody, function($message) use ($useremail)
         {    
-            $message->to($adminemail)->subject('This is test e-mail');    
+            $message->to($useremail)->subject('Complaint Resolved');    
         });
     }
 }

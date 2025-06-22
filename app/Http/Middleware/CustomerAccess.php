@@ -3,10 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class AdminAccess
+use Illuminate\Support\Facades\Auth;
+
+class CustomerAccess
 {
     /**
      * Handle an incoming request.
@@ -17,8 +18,7 @@ class AdminAccess
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (Auth::check() && Auth::user()->user_type == 'admin')  {
+        if (Auth::check() && Auth::user()->user_type == 'user')  {
             return $next($request);
         } else{
 
@@ -34,7 +34,5 @@ class AdminAccess
             Auth::logout();
             return redirect()->route('login');
         }
-
-        //return $next($request);
     }
 }

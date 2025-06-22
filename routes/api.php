@@ -3,12 +3,14 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\API\UsersController;
+use App\Http\Controllers\API\ComplaintController;
 
 
 /*
@@ -26,13 +28,59 @@ use App\Http\Controllers\API\UsersController;
     return $request->user();
 }); */
 
-Route::post('/signin', function (Request $request) {  // /sanctum/token
+Route::post('/signup', function (Request $request) {  
+    $request->validate([
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'type' => 'required|in:user,techie',
+        'email' => 'required|email',        
+        'password' => 'required',        
+    ]);
+    //dd("here");
+
+    //$emailExist = User::where('email', $request->email)->count();  
+    $emailExist = User::where('email', $request->email)->exists();  
+
+    if($emailExist == 1){
+        $response = array('success'=>false,'message'=>'Email already exists!','data'=>[]);
+        return response()->json($response);
+    }
+
+    $hashedPassword = Hash::make($request->password);
+    User::create([
+        'firstname' => $request->firstname,
+        'lastname' => $request->lastname,
+        'email' => $request->email,
+        'password' => $hashedPassword,
+    ]);
+
+    $response = array('success'=>true,'message'=>'Registered Succesfully!','data'=>[]);
+
+    return response()->json($response);
+
+});
+
+Route::post('/raiseComp',[ComplaintController::class, 'store'])->middleware('auth:sanctum','customerAccess'); 
+Route::post('mycomplaints',[ComplaintController::class, 'getMyComplaints'])->middleware('auth:sanctum','customerAccess'); 
+Route::post('/deleteComplaint',[ComplaintController::class, 'deleteComplaint'])->middleware('auth:sanctum','customerAccess'); 
+
+
+Route::post('complaintList',[ComplaintController::class, 'getComplaintList'])->middleware('auth:sanctum','adminAccess'); 
+Route::post('assignComplaint',[ComplaintController::class, 'assignComplaint'])->middleware('auth:sanctum','adminAccess'); 
+
+
+Route::post('assignedcomplaints',[ComplaintController::class, 'getAssignedComplaints'])->middleware('auth:sanctum','techieAccess'); 
+Route::post('updateCmpStatus',[ComplaintController::class, 'updateComplaintStatus'])->middleware('auth:sanctum','techieAccess'); 
+
+
+
+
+Route::post('/signin', function (Request $request) {  
     //dd($request->email);
 
     $request->validate([
         'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
+        'password' => 'required',        
     ]);    
     //dd($request->password);
     $user = User::where('email', $request->email)->first();    
@@ -45,20 +93,14 @@ Route::post('/signin', function (Request $request) {  // /sanctum/token
 
         $data = array();        
 
-        $response = array('status'=>false,'message'=>'Incorrect Email or Password','data'=>$data);
+        $response = array('success'=>false,'message'=>'Incorrect Email or Password','data'=>$data);
         return response()->json($response);
 
     }
  
     //return $user->createToken($request->device_name)->plainTextToken;
-    $token = $user->createToken($request->device_name,['*'],now()->addMinutes(60))->plainTextToken;
-    $response = array('status'=>true,'message'=>'Logged In Succesfully!','token'=>$token,'data'=>[]);
+    $device_name = isset($request->device_name) ? $request->device_name : '';
+    $token = $user->createToken($device_name,['*'])->plainTextToken;
+    $response = array('success'=>true,'message'=>'Logged In Succesfully!','token'=>$token,'data'=>[]);
     return response()->json($response);
 });
-
-Route::get('/dummyData', [UserController::class, 'dummyAPIdata'])->middleware('auth:sanctum');
-//Route::get('/dummyData', [UsersController::class, 'dummyAPIdata']);
-
-/* Route::delete('/deleteYoaks/{id}',function(){
-    return response()->json("$id hhh",200);
-}); */
