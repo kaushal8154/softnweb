@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\Complaint;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
@@ -46,4 +48,14 @@ class User extends Authenticatable
     ];
 
     use SoftDeletes;
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class,'user_id');
+    }
+
+    public function assigned_complaints()
+    {
+        return $this->hasMany(Complaint::class,'techie_id');
+    }
 }

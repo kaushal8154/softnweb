@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Complaint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
@@ -24,8 +25,10 @@ use App\Http\Controllers\API\ComplaintController;
 |
 */
 
-/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+/* Route::get('testing', function () {  
+    $complaints = User::find(58)->complaints;       
+    dd($complaints);
 }); */
 
 Route::post('/signup', function (Request $request) {  

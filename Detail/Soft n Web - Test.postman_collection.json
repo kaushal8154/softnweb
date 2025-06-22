@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "23275d00-bf7c-41c4-977d-59da642969cd",
+		"name": "Soft n Web - Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46072798",
+		"_collection_link": "https://kaushal-8954412.postman.co/workspace/Kaushal's-Workspace~84777431-0b76-490c-813c-53b4c1196cc7/collection/46072798-23275d00-bf7c-41c4-977d-59da642969cd?action=share&source=collection_link&creator=46072798"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": " application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "Kaushal",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Kapadiya",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "kaushal@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "kaushalkapadiya@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/signin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Complaint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer jKR8SN5lf4aay0XfiEVPVU6cOZJlqMmAvvHrqqiE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "subject",
+							"value": "AC not working",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "flights AC not working",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/raiseComp",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"raiseComp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Complaint - Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer jKR8SN5lf4aay0XfiEVPVU6cOZJlqMmAvvHrqqiE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cmpid",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "techie_id",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/assignComplaint",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"assignComplaint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Complaint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer jKR8SN5lf4aay0XfiEVPVU6cOZJlqMmAvvHrqqiE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cmpid",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "techie_id",
+							"value": "60",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/deleteComplaint",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"deleteComplaint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comp Status - Techie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer jKR8SN5lf4aay0XfiEVPVU6cOZJlqMmAvvHrqqiE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cmpid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "resolved",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/updateCmpStatus",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"updateCmpStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Complaints - Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer jKR8SN5lf4aay0XfiEVPVU6cOZJlqMmAvvHrqqiE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "open",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/complaintList",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"complaintList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Complaints",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer yndpiZvSNG3ca1jz90gpxsRMy5bn8oa4tGCxswUE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "open",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/mycomplaints",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"mycomplaints"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assigned Complaints - Techie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer yndpiZvSNG3ca1jz90gpxsRMy5bn8oa4tGCxswUE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "open",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/assignedcomplaints",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"assignedcomplaints"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "28|aenXSgj5e6XCOZZ5mzscqbbubNRtq9uQeQwMB0Ma",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

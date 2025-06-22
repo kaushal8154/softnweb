@@ -38,6 +38,18 @@ email: virat@gmail.com
 pass: 123456
 ----------------------------------------------------------------------------------------------
 
+Run below artisan commands to help setup (if need)
+
+php artisan key:generate
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan o:clear
+php artisan config:cache
+
+----------------------------------------------------------------------------------------------
+
+
 
 set global env variable (url) in given postman collection
 After sign in, please set the bearer token in collection authorization header.
